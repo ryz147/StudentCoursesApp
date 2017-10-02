@@ -2,6 +2,8 @@ package com.ryz.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,21 +31,21 @@ public class CoursesController {
 	private CourseServices courseServices;
 	
 	@PostMapping
-	public Courses createCourses (@RequestBody Courses courses) throws Exception{
-		logger.info("creating course"+ courses);
+	public Courses createCourses (@RequestBody @Valid Courses courses) throws Exception{
+		logger.info("creating course"+" "+ courses);
 		return courseServices.createCourses(courses);
 	}
 	
 	@PutMapping
 	public Courses updateCourses (@RequestBody Courses courses) throws Exception{
-		logger.info("update course"+ courses);
+		logger.info("update course"+" "+courses);
 		return courseServices.updateCourses(courses);
 	}
 	
 	@DeleteMapping(value="/{courseId}")
 	public ResponseEntity<HttpStatus> deleteCourses(@PathVariable("courseId")String courseId) throws Exception{
 		courseServices.deleteCourses(courseId);
-		logger.info("delete course"+ courseId);
+		logger.info("delete course"+" "+ courseId);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
@@ -54,7 +56,7 @@ public class CoursesController {
 	}
 	@GetMapping(value="/{courseId}")
 	public Courses getCoursesById(@PathVariable ("courseId") String courseId) throws Exception{
-		logger.info("Fetch course by Id"+ courseId);
+		logger.info("Fetch course by Id"+" "+courseId);
 		return courseServices.getCourseById(courseId);
 	}
 	@GetMapping(value="studentDetails/{courseId}")

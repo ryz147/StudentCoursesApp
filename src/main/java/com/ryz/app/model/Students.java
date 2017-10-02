@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "Students")
 @XmlRootElement
@@ -25,6 +27,7 @@ public class Students implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String studentId;
+	@NotBlank(message="Student Name can not be blank")
 	private String studentName;
 	private String studentAddress;
 

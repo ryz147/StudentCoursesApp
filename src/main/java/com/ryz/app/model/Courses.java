@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -19,6 +21,7 @@ public class Courses {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private String courseId;
+	@NotBlank(message="Course Name can not be blank")
 	private String courseName;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH }, targetEntity = Students.class)
